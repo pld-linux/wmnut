@@ -1,12 +1,12 @@
 Summary:	Dockable UPS Monitor
 Summary(pl):	Dokowalny monitor UPS-ów
 Name:		wmnut
-Version:	0.58
+Version:	0.60
 Release:	1
 License:	GPL
 Group:		X11/Window Managers/Tools
 Source0:	http://wmnut.tuxfamily.org/files/%{name}-%{version}.tar.bz2
-# Source0-md5:	0f801108dedfbb8e6c46cb44c757e76f
+# Source0-md5:	b37429c06fc4e5b80fc668a5f1401f74
 Patch0:		%{name}-ksh.patch
 URL:		http://wmnut.tuxfamily.org/
 BuildRequires:	XFree86-devel
@@ -41,7 +41,7 @@ Window Makera lub AfterStepa.
 	--with-nut-includes=/usr/include/nut
 
 %{__make} \
-	LIBS="/usr/lib/parseconf.o -lssl"
+	LIBS="-lssl"
 
 %install
 rm -rf $RPM_BUILD_ROOT
