@@ -42,14 +42,13 @@ install wmnut/wmnut $RPM_BUILD_ROOT%{_bindir}
 install wmnut/wmnut.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install wmnut/wmnutrc $RPM_BUILD_ROOT%{_sysconfdir}
 
-gzip -9nf BUGS CHANGES HINTS README TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc BUGS CHANGES HINTS README TODO
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/wmnutrc
