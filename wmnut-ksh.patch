@@ -1,0 +1,39 @@
+--- wmnut-0.58/configure.in.orig	Mon Jul 14 14:33:56 2003
++++ wmnut-0.58/configure.in	Thu Aug  7 13:45:28 2003
+@@ -129,22 +129,19 @@
+ 			yes|no)
+ 				;;
+ 			*)
+-				if ((test -f $withval/lib/upsclient.o) &&
+-					(test -f $withval/include/upsclient.h))
++				if test -f $withval/lib/upsclient.o -a -f $withval/include/upsclient.h
+ 				then
+ 					AC_MSG_RESULT(found)
+ 					LDFLAGS="$LDFLAGS $withval/lib/upsclient.o"
+ 					NUT_HEADER="-I$withval/include"
+ 				else
+-					if ((test -f $withval/upsclient.o) &&
+-						(test -f $withval/upsclient.h))
++					if test -f $withval/upsclient.o -a -f $withval/upsclient.h
+ 					then
+ 						AC_MSG_RESULT(found)
+ 						LDFLAGS="$LDFLAGS $withval/upsclient.o"
+ 						NUT_HEADER="-I$withval"
+ 					else
+-						if ((test -f $withval/clients/upsclient.o) &&
+-							(test -f $withval/clients/upsclient.h))
++						if test -f $withval/clients/upsclient.o -a -f $withval/clients/upsclient.h
+ 						then
+ 							AC_MSG_RESULT(found)
+ 							LDFLAGS="$LDFLAGS $withval/clients/upsclient.o"
+--- wmnut-0.58/src/Makefile.am.orig	Sun Mar  2 14:02:24 2003
++++ wmnut-0.58/src/Makefile.am	Thu Aug  7 13:46:15 2003
+@@ -16,7 +16,7 @@
+ 	@NUT_HEADER@ \
+ 	@XCFLAGS@
+ 
+-CFLAGS = @DFLAGS@ @CFLAGS@
++AM_CFLAGS = @DFLAGS@
+ 
+ wmnut_LDADD = \
+ 	@LIBRARY_SEARCH_PATH@ \
