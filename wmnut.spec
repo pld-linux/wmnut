@@ -1,20 +1,19 @@
 Summary:	Dockable UPS Monitor
 Summary(pl):	Dokowalny monitor UPS-ów
 Name:		wmnut
-Version:	0.1
+Version:	0.58
 Release:	1
 License:	GPL
 Group:		X11/Window Managers/Tools
 Source0:	http://wmnut.tuxfamily.org/files/%{name}-%{version}.tar.bz2
-# Source0-md5:	0b540a25e3c8dbaed082f75a8b0dfe66
-Patch0:		http://wmnut.tuxfamily.org/files/%{name}-0.20-preHoneymoon.diff.gz
+# Source0-md5:	0f801108dedfbb8e6c46cb44c757e76f
+Patch0:		%{name}-ksh.patch
 URL:		http://wmnut.tuxfamily.org/
 BuildRequires:	XFree86-devel
-BuildRequires:	nut-devel >= 1.2.0
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	nut-devel >= 1.4.0-1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 WMNUT is an UPS/Battery Monitor. It is used to visually display and
@@ -33,24 +32,32 @@ Window Makera lub AfterStepa.
 %patch -p1
 
 %build
-%{__make} -C wmnut \
-	CC="%{__cc}" CFLAGS="%{rpmcflags}" LIBS="-lXpm -lXext -lX11 -lssl" \
-	OBJNUT=/usr/lib/upsclient.o
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--with-nut-libs=/usr/lib \
+	--with-nut-includes=/usr/include/nut
+
+%{__make} \
+	LIBS="/usr/lib/parseconf.o -lssl"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
-install wmnut/wmnut $RPM_BUILD_ROOT%{_bindir}
-install wmnut/wmnut.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install wmnut/wmnutrc $RPM_BUILD_ROOT%{_sysconfdir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install wmnutrc $RPM_BUILD_ROOT%{_sysconfdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc BUGS CHANGES HINTS README TODO
+%doc AUTHORS BUGS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/wmnutrc
