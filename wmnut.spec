@@ -1,14 +1,15 @@
 Summary:	Dockable UPS Monitor
 Summary(pl):	Dokowalny monitor UPS-ów
 Name:		wmnut
-Version:	0.0.9
+Version:	0.1
 Release:	1
 License:	GPL
 Group:		X11/Window Managers/Tools
 Source0:	http://wmnut.tuxfamily.org/files/%{name}-%{version}.tar.bz2
+Patch0:		http://wmnut.tuxfamily.org/files/%{name}-0.20-preHoneymoon.diff.gz
 URL:		http://wmnut.tuxfamily.org/
 BuildRequires:	XFree86-devel
-BuildRequires:	nut-devel
+BuildRequires:	nut-devel >= 1.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -28,11 +29,12 @@ Window Makera lub AfterStepa.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{__make} -C wmnut \
-	CC="%{__cc}" CFLAGS="%{rpmcflags}" \
-	OBJNUT=/usr/lib/upsfetch.o
+	CC="%{__cc}" CFLAGS="%{rpmcflags}" LIBS="-lXpm -lXext -lX11 -lssl" \
+	OBJNUT=/usr/lib/upsclient.o
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -41,7 +43,6 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}}
 install wmnut/wmnut $RPM_BUILD_ROOT%{_bindir}
 install wmnut/wmnut.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install wmnut/wmnutrc $RPM_BUILD_ROOT%{_sysconfdir}
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
