@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		X11/Window Managers/Tools
 Source0:	http://wmnut.tuxfamily.org/files/%{name}-%{version}.tar.bz2
+# Source0-md5:	0b540a25e3c8dbaed082f75a8b0dfe66
 Patch0:		http://wmnut.tuxfamily.org/files/%{name}-0.20-preHoneymoon.diff.gz
 URL:		http://wmnut.tuxfamily.org/
 BuildRequires:	XFree86-devel
