@@ -1,33 +1,5 @@
---- wmnut-0.58/configure.in.orig	Mon Jul 14 14:33:56 2003
-+++ wmnut-0.58/configure.in	Thu Aug  7 13:45:28 2003
-@@ -129,22 +129,19 @@
- 			yes|no)
- 				;;
- 			*)
--				if ((test -f $withval/lib/upsclient.o) &&
--					(test -f $withval/include/upsclient.h))
-+				if test -f $withval/lib/upsclient.o -a -f $withval/include/upsclient.h
- 				then
- 					AC_MSG_RESULT(found)
- 					LDFLAGS="$LDFLAGS $withval/lib/upsclient.o"
- 					NUT_HEADER="-I$withval/include"
- 				else
--					if ((test -f $withval/upsclient.o) &&
--						(test -f $withval/upsclient.h))
-+					if test -f $withval/upsclient.o -a -f $withval/upsclient.h
- 					then
- 						AC_MSG_RESULT(found)
- 						LDFLAGS="$LDFLAGS $withval/upsclient.o"
- 						NUT_HEADER="-I$withval"
- 					else
--						if ((test -f $withval/clients/upsclient.o) &&
--							(test -f $withval/clients/upsclient.h))
-+						if test -f $withval/clients/upsclient.o -a -f $withval/clients/upsclient.h
- 						then
- 							AC_MSG_RESULT(found)
- 							LDFLAGS="$LDFLAGS $withval/clients/upsclient.o"
---- wmnut-0.58/src/Makefile.am.orig	Sun Mar  2 14:02:24 2003
-+++ wmnut-0.58/src/Makefile.am	Thu Aug  7 13:46:15 2003
+--- wmnut-0.60/src/Makefile.am.orig	2003-11-09 10:44:40.000000000 +0100
++++ wmnut-0.60/src/Makefile.am	2003-12-20 02:53:18.681955368 +0100
 @@ -16,7 +16,7 @@
  	@NUT_HEADER@ \
  	@XCFLAGS@
@@ -37,3 +9,68 @@
  
  wmnut_LDADD = \
  	@LIBRARY_SEARCH_PATH@ \
+--- wmnut-0.60/configure.ac.orig	2003-11-10 12:43:17.000000000 +0100
++++ wmnut-0.60/configure.ac	2003-12-20 02:53:01.653544080 +0100
+@@ -129,25 +129,25 @@
+ 			yes|no)
+ 				;;
+ 			*)
+-				if ((test -f $withval/lib/upsclient.o) &&
++				if ( (test -f $withval/lib/upsclient.o) &&
+ 					(test -f $withval/lib/parseconf.o) &&
+-					(test -f $withval/include/upsclient.h))
++					(test -f $withval/include/upsclient.h) )
+ 				then
+ 					AC_MSG_RESULT(found)
+ 					LDFLAGS="$LDFLAGS $withval/lib/upsclient.o $withval/lib/parseconf.o"
+ 					NUT_HEADER="-I$withval/include"
+ 				else
+-					if ((test -f $withval/upsclient.o) &&
++					if ( (test -f $withval/upsclient.o) &&
+ 						(test -f $withval/parseconf.o) &&
+-						(test -f $withval/upsclient.h))
++						(test -f $withval/upsclient.h) )
+ 					then
+ 						AC_MSG_RESULT(found)
+ 						LDFLAGS="$LDFLAGS $withval/upsclient.o $withval/lib/parseconf.o"
+ 						NUT_HEADER="-I$withval"
+ 					else
+-						if ((test -f $withval/clients/upsclient.o) &&
++						if ( (test -f $withval/clients/upsclient.o) &&
+ 							(test -f $withval/clients/parseconf.o) &&
+-							(test -f $withval/clients/upsclient.h))
++							(test -f $withval/clients/upsclient.h) )
+ 						then
+ 							AC_MSG_RESULT(found)
+ 							LDFLAGS="$LDFLAGS $withval/clients/upsclient.o $withval/lib/parseconf.o"
+@@ -166,8 +166,8 @@
+ 			yes|no)
+ 				;;
+ 			*)
+-				if ((test -f $withval/upsclient.o) &&
+-					(test -f $withval/clients/parseconf.o))
++				if ( (test -f $withval/upsclient.o) &&
++					(test -f $withval/parseconf.o) )
+ 				then
+ 					AC_MSG_RESULT(found)
+ 					LDFLAGS="$LDFLAGS $withval/upsclient.o $withval/parseconf.o"
+@@ -212,15 +212,15 @@
+ 	 	NUT_LIB="-L/usr/lib -lupsclient"
+ 	 	NUT_HEADER="-I/usr/include"
+ 	else
+-		if ((test -f /usr/local/ups/misc/upsclient.o) &&
+-			(test -f /usr/local/ups/misc/parseconf.o))
++		if ( (test -f /usr/local/ups/misc/upsclient.o) &&
++			(test -f /usr/local/ups/misc/parseconf.o) )
+ 		then
+ 		  AC_MSG_RESULT(found)
+ 		  NUT_LIB="/usr/local/ups/misc/upsclient.o /usr/local/ups/misc/parseconf.o"
+ 		  NUT_HEADER="-I/usr/local/ups/misc"
+ 		else
+-		  if ((test -f /usr/lib/upsclient.o) &&
+-			(test -f /usr/lib/parseconf.o))
++		  if ( (test -f /usr/lib/upsclient.o) &&
++			(test -f /usr/lib/parseconf.o) )
+ 		  then
+ 			AC_MSG_RESULT(found)
+ 			NUT_LIB="/usr/lib/upsclient.o /usr/lib/parseconf.o"
