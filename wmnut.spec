@@ -18,8 +18,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 WMNUT is an UPS/Battery Monitor. It is used to visually display and
 interpret details of UPS/Battery status via NUT - Network UPS Tools
-framework. WMNUT is dockable using WindowMaker and AfterStep
-window managers.
+framework. WMNUT is dockable using WindowMaker and AfterStep window
+managers.
 
 %description -l pl
 WMNUT jest monitorem stanu UPS-a i baterii. S³u¿y do wizualnego
@@ -60,4 +60,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/wmnutrc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/wmnutrc
