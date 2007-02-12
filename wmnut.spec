@@ -1,5 +1,5 @@
 Summary:	Dockable UPS Monitor
-Summary(pl):	Dokowalny monitor UPS-ów
+Summary(pl.UTF-8):   Dokowalny monitor UPS-Ã³w
 Name:		wmnut
 Version:	0.60
 Release:	1
@@ -21,10 +21,10 @@ interpret details of UPS/Battery status via NUT - Network UPS Tools
 framework. WMNUT is dockable using WindowMaker and AfterStep window
 managers.
 
-%description -l pl
-WMNUT jest monitorem stanu UPS-a i baterii. S³u¿y do wizualnego
-pokazywania i interpretacji szczegó³ów stanu UPS-ów i baterii poprzez
-NUT - sieciowe narzêdzia do UPS-ów. WMNUT jest dokowalny pod kontrol±
+%description -l pl.UTF-8
+WMNUT jest monitorem stanu UPS-a i baterii. SÅ‚uÅ¼y do wizualnego
+pokazywania i interpretacji szczegÃ³Å‚Ã³w stanu UPS-Ã³w i baterii poprzez
+NUT - sieciowe narzÄ™dzia do UPS-Ã³w. WMNUT jest dokowalny pod kontrolÄ…
 Window Makera lub AfterStepa.
 
 %prep
