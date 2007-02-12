@@ -1,5 +1,5 @@
 Summary:	Dockable UPS Monitor
-Summary(pl.UTF-8):   Dokowalny monitor UPS-ów
+Summary(pl.UTF-8):	Dokowalny monitor UPS-ów
 Name:		wmnut
 Version:	0.60
 Release:	1
